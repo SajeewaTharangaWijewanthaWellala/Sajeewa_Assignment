@@ -41,7 +41,7 @@ public class CustomerVerticle extends AbstractVerticle {
                 .handler(req -> {
                     eventBus.request("GET", "GET", reply -> {
                         if (reply.succeeded()) {
-                            req.json(reply.result().body()).toString();
+                            req.json(reply.result().body());
                         }
                     });
                 });
@@ -55,14 +55,14 @@ public class CustomerVerticle extends AbstractVerticle {
                     var body = req.getBodyAsJson();
                     eventBus.request("POST", body, reply -> {
                         if (reply.succeeded()) {
-                            if (reply.result().body().toString().equals("1")) {
+                            //if (reply.result().body().toString().equals("1")) {
                                 req.response()
                                         .end("Successfully updated");
                             } else {
                                 req.response()
                                         .end(Json.encodePrettily(reply.result().body()));
                             }
-                        }
+
                     });
                 });
     }
@@ -71,7 +71,7 @@ public class CustomerVerticle extends AbstractVerticle {
             Vertx vertx = Vertx.vertx();
             Router router = Router.router(vertx);
             vertx.deployVerticle(new CustomerVerticle(router));
-            vertx.deployVerticle(new DataBaseVerticle(router));
+            vertx.deployVerticle(new DataBaseVerticle());
 
 
 

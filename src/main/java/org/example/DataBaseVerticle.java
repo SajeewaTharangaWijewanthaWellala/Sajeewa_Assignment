@@ -20,11 +20,7 @@ import java.util.stream.StreamSupport;
 import static io.vertx.mysqlclient.MySQLPool.pool;
 
 public class DataBaseVerticle extends AbstractVerticle{
-    private Router router;
-    //private final MySQLPool connection;
-    DataBaseVerticle(Router router){
-        this.router = router;
-    }
+
     MySQLPool conn;
 
     private static Function<Row, Member> MAPPER = (row) ->
