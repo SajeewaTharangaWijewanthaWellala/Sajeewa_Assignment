@@ -41,7 +41,7 @@ public class CustomerVerticle extends AbstractVerticle {
                 .handler(req -> {
                     eventBus.request("GET", "GET", reply -> {
                         if (reply.succeeded()) {
-                            req.json(reply.result().body());
+                            req.json(reply.result().body()).toString();
                         }
                     });
                 });
